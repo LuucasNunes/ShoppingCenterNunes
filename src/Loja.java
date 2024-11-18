@@ -3,7 +3,7 @@ public class Loja {
     /*atributos da loja */
     String nome;
     int quantidadeFuncionarios;
-    float salarioBaseFuncionario;
+    double salarioBaseFuncionario;
 
     /*construtores da loja*/
 
@@ -20,7 +20,7 @@ public class Loja {
     }
 
     //Construtor completo
-    Loja(String nome, int quantidadeFuncionarios, float salarioBaseFuncionario) {
+    Loja(String nome, int quantidadeFuncionarios, double salarioBaseFuncionario) {
         this.nome = nome;
         this.quantidadeFuncionarios = quantidadeFuncionarios;
         this.salarioBaseFuncionario = salarioBaseFuncionario;
