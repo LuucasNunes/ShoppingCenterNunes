@@ -4,7 +4,8 @@ public class Main {
 
         Loja newSchool = new Loja();
         Loja theShield = new Loja("TheShield", 15);
-        Loja dexterJeans = new Loja("DexterJeans", 30, 3.000);
+        Loja dexterJeans = new Loja("DexterJeans", 30, 3000.00);
 
+        System.out.println(dexterJeans);
     }
 }
