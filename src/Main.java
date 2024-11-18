@@ -4,6 +4,6 @@ public class Main {
         Loja newSchool = new Loja();
 
         newSchool.nome = "newSchool";
-        System.out.println(newSchool.nome);
+        System.out.println("test de commit e push");
     }
 }
