@@ -3,6 +3,9 @@ public class Loja {
     private String nome;
     private int quantidadeFuncionarios;
     private double salarioBaseFuncionario;
+    private Endereco endereco;
+    private Data data;
+
 
     /*Construtores da loja*/
 
@@ -12,17 +15,21 @@ public class Loja {
     }
 
     //Construtor com valores nome e qtd
-    Loja(String nome, int quantidadeFuncionarios) {
+    Loja(String nome, int quantidadeFuncionarios, Data data, Endereco endereco) {
         this.nome = nome;
         this.quantidadeFuncionarios = quantidadeFuncionarios;
         this.salarioBaseFuncionario = -1;
+        this.endereco = endereco;
+        this.data = data;
     }
 
     //Construtor completo
-    Loja(String nome, int quantidadeFuncionarios, double salarioBaseFuncionario) {
+    Loja(String nome, int quantidadeFuncionarios, double salarioBaseFuncionario, Data data, Endereco endereco) {
         this.nome = nome;
         this.quantidadeFuncionarios = quantidadeFuncionarios;
         this.salarioBaseFuncionario = salarioBaseFuncionario;
+        this.endereco = endereco;
+        this.data = data;
     }
 
     /*Getters e Setters*/
@@ -49,6 +56,22 @@ public class Loja {
 
     public double getSalarioFuncionario() {
         return salarioBaseFuncionario;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setData(Data data) {
+        this.data = data;
+    }
+
+    public Data getData() {
+        return data;
     }
 
     /*Método toString -> passamos o @override para sobscrever esse método padrão do java*/
