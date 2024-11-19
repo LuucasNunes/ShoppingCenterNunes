@@ -1,4 +1,3 @@
-
 public class Loja {
     /*atributos da loja -> Utilizamos Private para manter as alterações somente por métodos*/
     private String nome;
@@ -57,19 +56,28 @@ public class Loja {
     @Override
 
     public String toString() {
-        return "Nome da loja: " + nome + "\nNúmero de funcionários: "
-                + quantidadeFuncionarios + "\nSalário: "
-                + salarioBaseFuncionario;
+        return "Nome da loja: " + nome + "\nNúmero de funcionários: " + quantidadeFuncionarios + "\nSalário: " + salarioBaseFuncionario;
     }
 
     /*Outros métodos*/
-    public float gastosComSalario() {
-        if (this.salarioBaseFuncionario == -1) {
-            return -1;
+    public String gastosComSalario() {
+        if (salarioBaseFuncionario == -1) {
+            return "Cálculo não pode ser realizado, pois o salário base é -1";
         } else {
-            return (float) (salarioBaseFuncionario * quantidadeFuncionarios);
+            return ("O gasto da sua loja com salários é: " + (salarioBaseFuncionario * quantidadeFuncionarios));
         }
     }
 
+    public String tamanhoLoja() {
+        if (quantidadeFuncionarios < 10) {
+            return ("Sua loja tem o tamanho P");
+        } else if ((quantidadeFuncionarios >= 10) && (quantidadeFuncionarios < 30)) {
+            return ("Sua loja tem o tamanho M");
+        } else if (quantidadeFuncionarios >= 30) {
+            return ("Sua loja tem o tamanho G");
+        } else {
+            return ("Sua loja ainda não tem funcionários");
+        }
+    }
 
 }
