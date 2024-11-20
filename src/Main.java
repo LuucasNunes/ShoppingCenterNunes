@@ -2,6 +2,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Loja newSchool = new Loja();
+        Produto produto = new Produto("Leite", 5.50, 15, 12, 2022);
+        System.out.println(produto);
+
     }
 }

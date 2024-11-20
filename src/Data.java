@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Data {
     private int dia;
     private int mes;
@@ -7,6 +9,12 @@ public class Data {
 
     Data() {
 
+    }
+
+    Data(LocalDate dataAtual) {
+        this.dia = dataAtual.getDayOfMonth();
+        this.mes = dataAtual.getMonthValue();
+        this.ano = dataAtual.getYear();
     }
 
     /*Construtor completo com validação de data*/
@@ -66,11 +74,6 @@ public class Data {
         return ano;
     }
 
-    @Override
-    public String toString() {
-        return "Data da criação da loja: " + dia + "/" + mes + "/" + ano;
-    }
-
     /*Outros métodos*/
     public String verificaAnoBissexto() {
         if (ano % 4 == 0 && (ano % 100 != 0 || ano % 400 == 0)) {
@@ -78,5 +81,27 @@ public class Data {
         } else {
             return "O ano " + ano + " não é bissexto.";
         }
+    }
+
+    public boolean verificaVencimento(Data outraData) {
+        if (this.ano != outraData.ano) {
+            return this.ano < outraData.ano;
+        }
+        if (this.mes != outraData.mes) {
+            return this.mes < outraData.mes;
+        }
+        return this.dia < outraData.dia;
+    }
+
+    /* Método estático para obter a data atual */
+    public static Data dataAtual() {
+        LocalDate data = LocalDate.now();
+        return new Data(data.getDayOfMonth(), data.getMonthValue(), data.getYear());
+    }
+
+    /*Método toString -> passamos o @override para sobscrever esse método padrão do java*/
+    @Override
+    public String toString() {
+        return "Data: " + dia + "/" + mes + "/" + ano;
     }
 }
