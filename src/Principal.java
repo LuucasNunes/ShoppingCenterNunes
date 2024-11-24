@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Principal {
     public static void main(String[] args) {
         Scanner ler = new Scanner(System.in);
+        ler.useLocale(Locale.forLanguageTag("pt-BR"));
         int lerInt;
 
         do {
@@ -11,7 +13,7 @@ public class Principal {
             System.out.printf("Informe uma opção: ");
             while (!ler.hasNextInt()) {
                 System.out.println("Por favor, insira um número válido!");
-                ler.next(); // Consome a entrada inválida
+                ler.next();
                 System.out.printf("Informe uma opção: ");
             }
             lerInt = ler.nextInt();
@@ -22,22 +24,25 @@ public class Principal {
                     ArrayList<Loja> lojas = new ArrayList<>();
                     int lojaContador = 1;
                     do {
-                        System.out.println("Você escolheu: Criar uma loja.\n");
-                        System.out.println("Digite um nome para sua Loja: ");
+                        System.out.println("\n-| Você escolheu: Criar uma loja. |-");
+                        System.out.println("\n!--- Dados Gerais da Loja---!");
+                        System.out.println("Digite um nome pra sua Loja: ");
                         ler.nextLine();
                         String nomeDaLoja = ler.nextLine();
                         System.out.println("\nDigite a quantidade de funcionários: ");
-                        int qtdFunc = ler.nextInt(); // !! fazer if para validar a data usando Data
+                        int qtdFunc = ler.nextInt();
                         System.out.println("\nDigite o salário base dos funcionários: ");
                         double salaBaseFunc = ler.nextDouble();
-                        System.out.println("\nDigite o dia da criação da loja: ");
+                        System.out.println("\n!--- Data de criação da loja ---!");
+                        System.out.println("Digite o dia da criação da loja: ");
                         int diaCriaLoja = ler.nextInt();
                         System.out.println("\nDigite o mês da criação da loja: ");
                         int mesCriaLoja = ler.nextInt();
                         System.out.println("\nDigite o ano da criação da loja: ");
                         int anoCriaLoja = ler.nextInt();
-                        System.out.println("\n!--------------------------!\n");
-                        System.out.println("\nDigite a rua da loja: ");
+                        System.out.println("\n!--- Endereço da loja ---!");
+                        ler.nextLine();
+                        System.out.println("Digite a rua da loja: ");
                         String nomeDaRua = ler.nextLine();
                         System.out.println("\nDigite o nome da cidade: ");
                         String nomeDaCidade = ler.nextLine();
@@ -49,26 +54,30 @@ public class Principal {
                         String numDaLoja = ler.nextLine();
                         System.out.println("\nDigite o complemento da loja: ");
                         String compDaLoja = ler.nextLine();
+
+                        // Criação dos objetos
                         Data dataCriacao = new Data(diaCriaLoja, mesCriaLoja, anoCriaLoja);
-                        Endereco enderecoDaLoja = new Endereco(nomeDaRua, nomeDaCidade, paisDaLoja, cepDaLoja,  numDaLoja,compDaLoja);
+                        Endereco enderecoDaLoja = new Endereco(nomeDaRua, nomeDaCidade, paisDaLoja, cepDaLoja, numDaLoja, compDaLoja);
                         Loja loja = new Loja(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja);
                         lojas.add(loja);
                         lojaContador++;
-                        System.out.println("Você criou essa loja: " + loja + "\n");
-                        System.out.println("\nVocê deseja criar mais uma loja? (1)Sim (2)Não");
+                        System.out.println("\nVocê criou essa loja: " + loja);
+                        System.out.println("\nVocê deseja criar mais uma loja? (1)Sim (2)Não: ");
                         continuarCriando = ler.nextInt();
                     } while (continuarCriando == 1);
+                    System.out.println("--------------------------------------");
                     System.out.println("\nResumo de todas as lojas criadas:");
                     for (int i = 0; i < lojas.size(); i++) {
                         System.out.println("\nLoja " + (i + 1) + ":");
-                        System.out.println(lojas.get(i));  // Exibe cada loja criada
+                        System.out.println("\n" + lojas.get(i));
                     }
+                    System.out.println("--------------------------------------\n");
                     break;
                 case 2:
-                    System.out.println("Você escolheu: Criar um produto.");
+                    System.out.println("\nVocê escolheu: Criar um produto.");
                     break;
                 case 3:
-                    System.out.println("Saindo do programa...");
+                    System.out.println("\nSaindo do programa...");
                     break;
                 default:
                     System.out.println("\nOpção inválida! Digite uma opção válida.\n");
@@ -77,4 +86,3 @@ public class Principal {
         ler.close();
     }
 }
-
