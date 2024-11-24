@@ -5,7 +5,7 @@ public class Loja {
     private double salarioBaseFuncionario;
     private Endereco endereco;
     private Data data;
-
+    private String tipoDeLoja;
 
     /*Construtores da loja*/
 
@@ -83,7 +83,8 @@ public class Loja {
                 + "\nNúmero de funcionários: " + quantidadeFuncionarios
                 + "\nSalário: " + salarioBaseFuncionario
                 + "\n" + data
-                + "\n" + endereco;
+                + "\n" + endereco
+                + "\n" + tipoDeLoja;
     }
 
     /*Outros métodos*/

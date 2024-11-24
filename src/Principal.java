@@ -26,7 +26,20 @@ public class Principal {
                     do {
                         System.out.println("\n-| Você escolheu: Criar uma loja. |-");
                         System.out.println("\n!--- Dados Gerais da Loja---!");
-                        System.out.println("Digite um nome pra sua Loja: ");
+                        System.out.println("Digite qual o tipo da sua loja: (1) Cosméticos, (2) Vestuários, " +
+                                "(3) Bijuterias, (4) Alimentação ou (5) Informática: ");
+                        int escolheTipo = ler.nextInt();
+                        //protótipo de tipo de loja
+                        switch(escolheTipo){
+                            case 1:
+                                System.out.println("Seu tipo de Loja é do tipo: " ); break;
+                            case 2: break;
+                            case 3: break;
+                            case 4: break;
+                            case 5: break;
+                            default: break;
+                        }
+                        System.out.println("\nDigite um nome pra sua Loja: ");
                         ler.nextLine();
                         String nomeDaLoja = ler.nextLine();
                         System.out.println("\nDigite a quantidade de funcionários: ");
