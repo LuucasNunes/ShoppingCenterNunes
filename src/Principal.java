@@ -8,6 +8,8 @@ public class Principal {
         ler.useLocale(Locale.forLanguageTag("pt-BR"));
         int lerInt;
 
+        ArrayList<Loja> lojas = new ArrayList<>(); // Lista de lojas global
+
         do {
             System.out.println("(1) Criar uma loja\n" + "(2) Criar um produto\n" + "(3) Sair\n");
             System.out.printf("Informe uma opção: ");
@@ -20,8 +22,7 @@ public class Principal {
 
             switch (lerInt) {
                 case 1:
-                    int continuarCriando = ler.nextInt();
-                    ArrayList<Loja> lojas = new ArrayList<>();
+                    int continuarCriando;
                     int lojaContador = 1;
                     do {
                         System.out.println("\n-| Você escolheu: Criar uma loja. |-");
@@ -64,26 +65,24 @@ public class Principal {
 
                         Data dataCriacao = new Data(diaCriaLoja, mesCriaLoja, anoCriaLoja);
                         Endereco enderecoDaLoja = new Endereco(nomeDaRua, nomeDaCidade, paisDaLoja, cepDaLoja, numDaLoja, compDaLoja);
-                        System.out.println("\nQual o tamanho do seu estoque de produtos? ");
-                        int tamanhoDoEstoque = ler.nextInt();
                         Loja loja = null;
 
                         switch (escolheTipo) {
                             case 1: // Cosméticos
                                 System.out.println("\nDigite a taxa de comercialização: ");
                                 double taxaComercializacao = ler.nextDouble();
-                                loja = new Cosmetico(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, taxaComercializacao, tamanhoDoEstoque);
+                                loja = new Cosmetico(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, taxaComercializacao, estoqueProdutos);
                                 break;
                             case 2: // Vestuário
                                 System.out.println("\nA loja vende produtos importados? (1)Sim ou (2)Não: ");
                                 int escolheOpcao = ler.nextInt();
                                 boolean produtosImportados = escolheOpcao == 1;
-                                loja = new Vestuario(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, produtosImportados, tamanhoDoEstoque);
+                                loja = new Vestuario(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, produtosImportados, estoqueProdutos);
                                 break;
                             case 3: // Bijuterias
                                 System.out.println("\nQual a meta de vendas desse mês: ");
                                 double metaVendas = ler.nextDouble();
-                                loja = new Bijuteria(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, metaVendas, tamanhoDoEstoque);
+                                loja = new Bijuteria(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, metaVendas, estoqueProdutos);
                                 break;
                             case 4: // Alimentação
                                 System.out.println("\n -> Digite a data que a loja recebeu o alvará <-");
@@ -94,12 +93,12 @@ public class Principal {
                                 System.out.println("\nDigite o ano do alvará: ");
                                 int anoDoAlvara = ler.nextInt();
                                 Data dataAlvara = new Data(diaDoAlvara, mesDoAlvara, anoDoAlvara);
-                                loja = new Alimentacao(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, dataAlvara, tamanhoDoEstoque);
+                                loja = new Alimentacao(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, dataAlvara, estoqueProdutos);
                                 break;
                             case 5: // Informática
                                 System.out.println("Digite o valor do seguro eletrônico: ");
                                 double seguroEletronicos = ler.nextDouble();
-                                loja = new Informatica(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, seguroEletronicos, tamanhoDoEstoque);
+                                loja = new Informatica(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, seguroEletronicos, estoqueProdutos);
                                 break;
                             default:
                                 System.out.println("Opção inválida.");
@@ -126,8 +125,42 @@ public class Principal {
 
                 case 2:
                     System.out.println("\n -|Você escolheu: Criar um produto.|-");
+                    System.out.println("\nInforme o nome do produto:");
+                    ler.nextLine(); // Consumir o newline
+                    String nomeProduto = ler.nextLine();
 
+                    System.out.println("\nInforme o preço do produto:");
+                    double precoProduto = ler.nextDouble();
+
+                    System.out.println("\nInforme o dia de validade do produto:");
+                    int diaValidade = ler.nextInt();
+
+                    System.out.println("\nInforme o mês de validade do produto:");
+                    int mesValidade = ler.nextInt();
+
+                    System.out.println("\nInforme o ano de validade do produto:");
+                    int anoValidade = ler.nextInt();
+
+                    Produto novoProduto = new Produto(nomeProduto, precoProduto, diaValidade, mesValidade, anoValidade, 0);
+
+                    System.out.println("\nProduto criado com sucesso:\n" + novoProduto);
+
+                    System.out.println("\nInforme o índice da loja (1, 2, ...) onde deseja adicionar o produto:");
+                    int indiceLoja = ler.nextInt();
+
+                    if (indiceLoja > 0 && indiceLoja <= lojas.size()) {
+                        Loja lojaEscolhida = lojas.get(indiceLoja - 1);
+                        boolean inserido = lojaEscolhida.insereProduto(novoProduto); // Chama o método insereProduto
+                        if (inserido) {
+                            System.out.println("\nProduto adicionado à loja " + lojaEscolhida.getNome() + "\n");
+                        } else {
+                            System.out.println("\nErro: Não foi possível adicionar o produto à loja.");
+                        }
+                    } else {
+                        System.out.println("\nÍndice inválido. Produto não foi adicionado a nenhuma loja.");
+                    }
                     break;
+
                 case 3:
                     System.out.println("\nSaindo do programa...");
                     break;
@@ -135,6 +168,5 @@ public class Principal {
                     System.out.println("\nOpção inválida! Digite uma opção válida.\n");
             }
         } while (lerInt != 3); // Saindo do programa
-        ler.close();
     }
 }
