@@ -3,8 +3,8 @@ public class Alimentacao extends Loja{
 
     //Construtor completo
     Alimentacao(String nome, int quantidadeFuncionarios, double salarioBaseFuncionario,
-              Data data, Endereco endereco, Data dataAlvara) {
-        super(nome, quantidadeFuncionarios, salarioBaseFuncionario, data, endereco);
+              Data data, Endereco endereco, Data dataAlvara, int tamanhoDoEstoque ) {
+        super(nome, quantidadeFuncionarios, salarioBaseFuncionario, data, endereco, tamanhoDoEstoque);
         this.dataAlvara = dataAlvara;
     }
 

@@ -3,8 +3,8 @@ public class Informatica extends Loja{
 
     //Construtor completo
     Informatica(String nome, int quantidadeFuncionarios, double salarioBaseFuncionario,
-              Data data, Endereco endereco, double seguroEletronicos) {
-        super(nome, quantidadeFuncionarios, salarioBaseFuncionario, data, endereco);
+              Data data, Endereco endereco, double seguroEletronicos, int tamanhoDoEstoque) {
+        super(nome, quantidadeFuncionarios, salarioBaseFuncionario, data, endereco, tamanhoDoEstoque);
         this.seguroEletronicos = seguroEletronicos;
     }
 
@@ -20,6 +20,6 @@ public class Informatica extends Loja{
     //Método toString
     @Override
     public String toString() {
-        return super.toString() + "\nSeguro a ser pago mensalmente: " + seguroEletronicos;
+        return super.toString() + "\nSeguro eletrônico a ser pago mensalmente: " + seguroEletronicos;
     }
 }

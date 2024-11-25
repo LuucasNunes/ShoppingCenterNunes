@@ -34,13 +34,12 @@ public class Principal {
                         System.out.println("\nDigite um nome pra sua Loja: ");
                         ler.nextLine(); // Consumir newline
                         String nomeDaLoja = ler.nextLine();
-
                         System.out.println("\nDigite a quantidade de funcionários: ");
                         int qtdFunc = ler.nextInt();
-
                         System.out.println("\nDigite o salário base dos funcionários: ");
                         double salaBaseFunc = ler.nextDouble();
-
+                        System.out.println("\nQual o tamanho do seu estoque de produtos? ");
+                        int estoqueProdutos = ler.nextInt();
                         System.out.println("\n!--- Data de criação da loja ---!");
                         System.out.println("Digite o dia da criação da loja: ");
                         int diaCriaLoja = ler.nextInt();
@@ -48,7 +47,6 @@ public class Principal {
                         int mesCriaLoja = ler.nextInt();
                         System.out.println("\nDigite o ano da criação da loja: ");
                         int anoCriaLoja = ler.nextInt();
-
                         System.out.println("\n!--- Endereço da loja ---!");
                         ler.nextLine();
                         System.out.println("Digite a rua da loja: ");
@@ -66,29 +64,46 @@ public class Principal {
 
                         Data dataCriacao = new Data(diaCriaLoja, mesCriaLoja, anoCriaLoja);
                         Endereco enderecoDaLoja = new Endereco(nomeDaRua, nomeDaCidade, paisDaLoja, cepDaLoja, numDaLoja, compDaLoja);
+                        System.out.println("\nQual o tamanho do seu estoque de produtos? ");
+                        int tamanhoDoEstoque = ler.nextInt();
                         Loja loja = null;
+
                         switch (escolheTipo) {
-                            case 1:
+                            case 1: // Cosméticos
                                 System.out.println("\nDigite a taxa de comercialização: ");
                                 double taxaComercializacao = ler.nextDouble();
-                                loja = new Cosmetico(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, taxaComercializacao);
+                                loja = new Cosmetico(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, taxaComercializacao, tamanhoDoEstoque);
                                 break;
-                            case 2:
-                                /*System.out.println("A loja vende produtos importados? (true/false): ");
-                                boolean produtosImportados = ler.nextBoolean();
-                                loja = new Vestuario(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, produtosImportados);*/
+                            case 2: // Vestuário
+                                System.out.println("\nA loja vende produtos importados? (1)Sim ou (2)Não: ");
+                                int escolheOpcao = ler.nextInt();
+                                boolean produtosImportados = escolheOpcao == 1;
+                                loja = new Vestuario(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, produtosImportados, tamanhoDoEstoque);
                                 break;
-                            case 3:
-                                // Criar a loja de Bijuteria (similar)
+                            case 3: // Bijuterias
+                                System.out.println("\nQual a meta de vendas desse mês: ");
+                                double metaVendas = ler.nextDouble();
+                                loja = new Bijuteria(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, metaVendas, tamanhoDoEstoque);
                                 break;
-                            case 4:
-                                // Criar a loja de Alimentação (similar)
+                            case 4: // Alimentação
+                                System.out.println("\n -> Digite a data que a loja recebeu o alvará <-");
+                                System.out.println("Digite o dia do alvará: ");
+                                int diaDoAlvara = ler.nextInt();
+                                System.out.println("\nDigite o mês do alvará: ");
+                                int mesDoAlvara = ler.nextInt();
+                                System.out.println("\nDigite o ano do alvará: ");
+                                int anoDoAlvara = ler.nextInt();
+                                Data dataAlvara = new Data(diaDoAlvara, mesDoAlvara, anoDoAlvara);
+                                loja = new Alimentacao(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, dataAlvara, tamanhoDoEstoque);
                                 break;
-                            case 5:
-                                // Criar a loja de Informática (similar)
+                            case 5: // Informática
+                                System.out.println("Digite o valor do seguro eletrônico: ");
+                                double seguroEletronicos = ler.nextDouble();
+                                loja = new Informatica(nomeDaLoja, qtdFunc, salaBaseFunc, dataCriacao, enderecoDaLoja, seguroEletronicos, tamanhoDoEstoque);
                                 break;
                             default:
                                 System.out.println("Opção inválida.");
+                                break;
                         }
 
                         if (loja != null) {
@@ -110,7 +125,8 @@ public class Principal {
                     break;
 
                 case 2:
-                    System.out.println("\nVocê escolheu: Criar um produto.");
+                    System.out.println("\n -|Você escolheu: Criar um produto.|-");
+
                     break;
                 case 3:
                     System.out.println("\nSaindo do programa...");

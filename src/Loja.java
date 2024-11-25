@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Loja {
     /*atributos da loja -> Utilizamos Private para manter as alterações somente por métodos*/
     private String nome;
@@ -6,30 +8,32 @@ public class Loja {
     private Endereco endereco;
     private Data data;
     private String tipoDeLoja;
+    private Produto[] estoqueProdutos;
 
     /*Construtores da loja*/
 
     //Construtor padrão -> Não inicia nenhum atributo
     Loja() {
-
     }
 
     //Construtor com valores nome e qtd
-    Loja(String nome, int quantidadeFuncionarios, Data data, Endereco endereco) {
+    Loja(String nome, int quantidadeFuncionarios, Data data, Endereco endereco, int tamanhoDoEstoque) {
         this.nome = nome;
         this.quantidadeFuncionarios = quantidadeFuncionarios;
         this.salarioBaseFuncionario = -1;
-        this.endereco = endereco;
         this.data = data;
+        this.endereco = endereco;
+        this.estoqueProdutos = new Produto[tamanhoDoEstoque];
     }
 
     //Construtor completo
-    Loja(String nome, int quantidadeFuncionarios, double salarioBaseFuncionario, Data data, Endereco endereco) {
+    Loja(String nome, int quantidadeFuncionarios, double salarioBaseFuncionario, Data data, Endereco endereco, int tamanhoDoEstoque) {
         this.nome = nome;
         this.quantidadeFuncionarios = quantidadeFuncionarios;
         this.salarioBaseFuncionario = salarioBaseFuncionario;
-        this.endereco = endereco;
         this.data = data;
+        this.endereco = endereco;
+        this.estoqueProdutos = new Produto[tamanhoDoEstoque];
     }
 
     /*Getters e Setters*/
@@ -51,7 +55,7 @@ public class Loja {
     }
 
     public void setSalarioFuncionario(double salarioBaseFuncionario) {
-        this.salarioBaseFuncionario = Loja.this.salarioBaseFuncionario;
+        this.salarioBaseFuncionario = salarioBaseFuncionario;
     }
 
     public double getSalarioFuncionario() {
@@ -74,38 +78,83 @@ public class Loja {
         return data;
     }
 
-    /*Método toString -> passamos o @override para sobscrever esse método padrão do java*/
+    public void setEstoqueProdutos(Produto[] estoqueProdutos) {
+        this.estoqueProdutos = estoqueProdutos;
+    }
+
+    public Produto[] getEstoqueProdutos() {
+        return estoqueProdutos;
+    }
+
+    /*Método toString -> passamos o @override para sobrescrever esse método padrão do java*/
 
     @Override
-
     public String toString() {
         return "Nome da loja: " + nome
                 + "\nNúmero de funcionários: " + quantidadeFuncionarios
                 + "\nSalário: " + salarioBaseFuncionario
                 + "\n" + data
                 + "\n" + endereco
-                + "\n" + tipoDeLoja;
+                + "\n" + tipoDeLoja
+                + "\nEstoque: " + (estoqueProdutos != null ? estoqueProdutos.length + " produtos registrados" : "Estoque não definido");
     }
 
     /*Outros métodos*/
+
     public String gastosComSalario() {
         if (salarioBaseFuncionario == -1) {
             return "Cálculo não pode ser realizado, pois o salário base é -1";
         } else {
-            return ("O gasto da sua loja com salários é: " + (salarioBaseFuncionario * quantidadeFuncionarios));
+            return "O gasto da sua loja com salários é: " + (salarioBaseFuncionario * quantidadeFuncionarios);
         }
     }
 
     public String tamanhoLoja() {
         if (quantidadeFuncionarios < 10) {
-            return ("Sua loja tem o tamanho P");
-        } else if ((quantidadeFuncionarios >= 10) && (quantidadeFuncionarios < 30)) {
-            return ("Sua loja tem o tamanho M");
+            return "Sua loja tem o tamanho P";
+        } else if (quantidadeFuncionarios < 30) {
+            return "Sua loja tem o tamanho M";
         } else if (quantidadeFuncionarios >= 30) {
-            return ("Sua loja tem o tamanho G");
+            return "Sua loja tem o tamanho G";
         } else {
-            return ("Sua loja ainda não tem funcionários");
+            return "Sua loja ainda não tem funcionários";
         }
+    }
+
+    public String imprimeProdutos() {
+        if (estoqueProdutos == null || estoqueProdutos.length == 0) {
+            return "Sua loja não tem produtos registrados!";
+        }
+        return Arrays.toString(estoqueProdutos);
+    }
+
+    //Métodos insere e remove produto, substituindo null e retornando boolean
+    public boolean insereProduto(Produto produto) {
+        if (estoqueProdutos == null) {
+            return false;
+        }
+
+        for (int i = 0; i < estoqueProdutos.length; i++) {
+            if (estoqueProdutos[i] == null) {
+                estoqueProdutos[i] = produto;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean removeProduto(String nomeProduto) {
+        if (estoqueProdutos == null) {
+            return false;
+        }
+
+        for (int i = 0; i < estoqueProdutos.length; i++) {
+            if (estoqueProdutos[i] != null && estoqueProdutos[i].getNome().equals(nomeProduto)) {
+                estoqueProdutos[i] = null;
+                return true;
+            }
+        }
+        return false;
     }
 
 }

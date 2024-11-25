@@ -3,8 +3,8 @@ public class Bijuteria extends Loja {
 
     //Construtor completo
     Bijuteria(String nome, int quantidadeFuncionarios, double salarioBaseFuncionario,
-              Data data, Endereco endereco, double metaVendas) {
-        super(nome, quantidadeFuncionarios, salarioBaseFuncionario, data, endereco);
+              Data data, Endereco endereco, double metaVendas, int tamanhoDoEstoque) {
+        super(nome, quantidadeFuncionarios, salarioBaseFuncionario, data, endereco, tamanhoDoEstoque);
         this.metaVendas = metaVendas;
     }
 

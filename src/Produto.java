@@ -1,17 +1,15 @@
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 public class Produto {
     private String nome;
     private double preco;
     private Data dataValidade;
+
 
     /*Construtores*/
     Produto() {
 
     }
 
-    public Produto(String nome, double preco, int diaValidade, int mesValidade, int anoValidade) {
+    public Produto(String nome, double preco, int diaValidade, int mesValidade, int anoValidade, int tamanhoDoEstoque) {
         this.nome = nome;
         this.preco = preco;
         this.dataValidade = new Data(diaValidade, mesValidade, anoValidade);
@@ -22,7 +20,7 @@ public class Produto {
         this.nome = nome;
     }
 
-    public String getNome(String nome) {
+    public String getNome() {
         return nome;
     }
 

@@ -3,8 +3,8 @@ public class Vestuario extends Loja {
 
     //Construtor completo
     Vestuario(String nome, int quantidadeFuncionarios, double salarioBaseFuncionario,
-              Data data, Endereco endereco, boolean produtosImportados) {
-        super(nome, quantidadeFuncionarios, salarioBaseFuncionario, data, endereco);
+              Data data, Endereco endereco, boolean produtosImportados, int tamanhoDoEstoque) {
+        super(nome, quantidadeFuncionarios, salarioBaseFuncionario, data, endereco, tamanhoDoEstoque);
         this.produtosImportados = produtosImportados;
     }
 
